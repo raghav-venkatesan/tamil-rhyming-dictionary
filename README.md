@@ -1,1 +1,1 @@
-# tamil-rhyming-dictionary
+# dictionary
