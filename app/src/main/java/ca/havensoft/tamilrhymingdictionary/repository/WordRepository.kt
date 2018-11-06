@@ -1,10 +1,8 @@
 package ca.havensoft.tamilrhymingdictionary.repository
 
-import ca.havensoft.tamilrhymingdictionary.model.Word
-import javax.inject.Inject
 import javax.inject.Singleton
 
-typealias WordsReceived = (List<Word>) -> Unit
+typealias WordsReceived = (List<String>) -> Unit
 
 @Singleton
 data class WordRepository(private val service: WordListService) {

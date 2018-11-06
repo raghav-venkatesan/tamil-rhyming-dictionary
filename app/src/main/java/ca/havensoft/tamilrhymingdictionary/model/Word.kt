@@ -1,3 +1,9 @@
 package ca.havensoft.tamilrhymingdictionary.model
 
-data class Word(val englishTransliteration: String)
+import ca.havensoft.tamilrhymingdictionary.util.convertToTamilScript
+
+data class Word(val englishTransliteration: String) {
+
+    val inTamilScript = convertToTamilScript(englishTransliteration)
+
+}
