@@ -1,6 +1,5 @@
 package ca.havensoft.tamilrhymingdictionary.application
 
-import ca.havensoft.tamilrhymingdictionary.repository.WordListService
 import ca.havensoft.tamilrhymingdictionary.viewmodels.WordListViewModel
 
 fun component() = TamilRhymingDictionaryApplication.component

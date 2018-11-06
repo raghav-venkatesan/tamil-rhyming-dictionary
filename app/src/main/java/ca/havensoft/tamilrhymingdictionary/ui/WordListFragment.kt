@@ -28,7 +28,7 @@ class WordListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(WordListViewModel::class.java)
-        viewModel.init("blah")
+        viewModel.init("aa")
         viewModel.getWordList()
     }
 
