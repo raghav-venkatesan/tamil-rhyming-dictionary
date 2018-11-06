@@ -1,14 +1,22 @@
 package ca.havensoft.tamilrhymingdictionary.ui
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import ca.havensoft.tamilrhymingdictionary.R
+import ca.havensoft.tamilrhymingdictionary.databinding.WordListFragmentBinding
+import ca.havensoft.tamilrhymingdictionary.ui.adapter.WordListAdapter
 import ca.havensoft.tamilrhymingdictionary.viewmodels.WordListViewModel
+
+import kotlinx.android.synthetic.main.word_list_fragment.*
 
 class WordListFragment : Fragment() {
 
@@ -22,14 +30,36 @@ class WordListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.word_list_fragment, container, false)
+
+        viewModel = ViewModelProviders.of(this).get(WordListViewModel::class.java)
+
+        val binding = DataBindingUtil.inflate<WordListFragmentBinding>(
+                inflater, R.layout.word_list_fragment, container, false).apply {
+            wordListViewModel = viewModel
+            setLifecycleOwner(this@WordListFragment)
+        }
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(WordListViewModel::class.java)
-        viewModel.init("aa")
-        viewModel.getWordList()
+
+        word_list_view.layoutManager = LinearLayoutManager(context)
+
+        searchButton.setOnClickListener {
+            viewModel.init(rhymeWordInput.text.toString())
+
+            viewModel.getWordList().observe(viewLifecycleOwner, Observer { wordList ->
+                wordList?.let {
+                    Handler().postDelayed({
+                        val wordListAdapter = WordListAdapter(it)
+                        wordListAdapter.setHasStableIds(true)
+                        word_list_view.adapter = wordListAdapter
+                    }, 500)
+                }
+            })
+        }
     }
 
 }

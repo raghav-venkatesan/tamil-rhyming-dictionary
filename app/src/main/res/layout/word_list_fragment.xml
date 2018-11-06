@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="wordListViewModel"
+            type="ca.havensoft.tamilrhymingdictionary.viewmodels.WordListViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
         tools:context=".ui.WordListFragment">
 
-    <TextView
+        <!--
+        The below LinearLayout has focusable and focusableInTouchMode set to true to prevent the
+        TextInputEditText from getting focus when the activity is created.
+        -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/enter_a_rhyme_to_search">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/rhymeWordInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/searchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search"
+                android:textAllCaps="true"
+                android:layout_marginStart="15dp"/>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Word List Fragment"/>
+            android:id="@+id/word_list_view"
+            android:layoutAnimation="@anim/layout_animation_slide_up"/>
 
-</FrameLayout>
+    </LinearLayout>
+</layout>

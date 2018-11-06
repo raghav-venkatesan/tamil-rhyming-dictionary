@@ -4,6 +4,6 @@ import ca.havensoft.tamilrhymingdictionary.util.convertToTamilScript
 
 data class Word(val englishTransliteration: String) {
 
-    val inTamilScript = convertToTamilScript(englishTransliteration)
+    val tamilScript = convertToTamilScript(englishTransliteration)
 
 }

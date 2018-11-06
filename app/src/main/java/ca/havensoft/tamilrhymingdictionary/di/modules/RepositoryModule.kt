@@ -1,4 +1,4 @@
-package ca.havensoft.tamilrhymingdictionary.di
+package ca.havensoft.tamilrhymingdictionary.di.modules
 
 import ca.havensoft.tamilrhymingdictionary.repository.WordListService
 import ca.havensoft.tamilrhymingdictionary.repository.WordRepository

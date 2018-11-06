@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Tamil Rhyming Dictionary</string>
+    <string name="enter_a_rhyme_to_search">Enter a rhyme to search</string>
+    <string name="search">Search</string>
 </resources>

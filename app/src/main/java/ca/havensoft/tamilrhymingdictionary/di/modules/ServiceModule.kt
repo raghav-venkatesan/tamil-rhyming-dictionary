@@ -1,4 +1,4 @@
-package ca.havensoft.tamilrhymingdictionary.di
+package ca.havensoft.tamilrhymingdictionary.di.modules
 
 import android.content.Context
 import ca.havensoft.tamilrhymingdictionary.application.appContext
@@ -10,10 +10,6 @@ import dagger.Provides
 import javax.inject.Singleton
 @Module
 class ServiceModule {
-
-    @Provides
-    @Singleton
-    fun provideContext(): Context = appContext()
 
     @Provides
     @Singleton
