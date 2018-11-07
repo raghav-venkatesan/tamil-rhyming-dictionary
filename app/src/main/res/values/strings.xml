@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Tamil Rhyming Dictionary</string>
-    <string name="enter_a_rhyme_to_search">Enter a rhyme to search</string>
+    <string name="enter_a_word_to_search">Enter a word to search</string>
     <string name="search">Search</string>
+    <string name="edhugai">எதுகை</string>
+    <string name="monai">மோனை</string>
+    <string name="iyaibu">இயைபு</string>
+    <string name="clear">Clear</string>
 </resources>

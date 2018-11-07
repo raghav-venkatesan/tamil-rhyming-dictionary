@@ -49,7 +49,7 @@ class WordListFragment : Fragment() {
         word_list_view.layoutManager = GridLayoutManager(context, COLUMNS)
     }
 
-    fun searchButtonClicked() {
+    fun fetchMatchingWords() {
         viewModel.init(convertToLatinScript(rhyme_word_input.text.toString()))
 
         viewModel.wordList.observe(viewLifecycleOwner, Observer { wordList ->
