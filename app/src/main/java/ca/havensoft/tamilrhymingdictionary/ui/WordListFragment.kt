@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import ca.havensoft.tamilrhymingdictionary.R
+import ca.havensoft.tamilrhymingdictionary.application.MATCH_BEGINNING
+import ca.havensoft.tamilrhymingdictionary.application.MATCH_END
 import ca.havensoft.tamilrhymingdictionary.databinding.WordListFragmentBinding
 import ca.havensoft.tamilrhymingdictionary.ui.adapter.WordListAdapter
 import ca.havensoft.tamilrhymingdictionary.util.convertToLatinScript
@@ -50,7 +52,8 @@ class WordListFragment : Fragment() {
     }
 
     fun fetchMatchingWords() {
-        viewModel.init(convertToLatinScript(rhyme_word_input.text.toString()))
+        val matchCriteria = if (radio_group_search_type.checkedRadioButtonId == R.id.radio_button_end) MATCH_END else MATCH_BEGINNING
+        viewModel.updateWordList(convertToLatinScript(rhyme_word_input.text.toString()), matchCriteria)
 
         viewModel.wordList.observe(viewLifecycleOwner, Observer { wordList ->
             wordList?.let {

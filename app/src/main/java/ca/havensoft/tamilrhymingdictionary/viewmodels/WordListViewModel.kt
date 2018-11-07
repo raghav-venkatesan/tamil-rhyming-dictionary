@@ -1,7 +1,7 @@
 package ca.havensoft.tamilrhymingdictionary.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModel
 import ca.havensoft.tamilrhymingdictionary.application.injectWordRepo
 import ca.havensoft.tamilrhymingdictionary.model.Word
 import ca.havensoft.tamilrhymingdictionary.repository.WordRepository
@@ -14,10 +14,10 @@ class WordListViewModel : ViewModel() {
 
     val wordList = MutableLiveData<List<Word>>()
 
-    fun init(wordToBeMatched: String) {
+    fun updateWordList(wordToBeMatched: String, matchCriteria: Int) {
         injectWordRepo(this)
 
-        wordRepo.matchingWordList(wordToBeMatched) {
+        wordRepo.matchingWordList(wordToBeMatched, matchCriteria) {
             wordList.postValue(it)
         }
     }

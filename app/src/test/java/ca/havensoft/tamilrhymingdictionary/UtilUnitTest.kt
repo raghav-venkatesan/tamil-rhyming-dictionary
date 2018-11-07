@@ -12,4 +12,17 @@ class UtilUnitTest {
         val tamilWord = convertToTamilScript("ondRaa")
         assertEquals(tamilWord, "ஒன்றா")
     }
+
+    @Test
+    fun regex_matching_isCorrect() {
+        val word = "andRaadamkaaychchi"
+        val regex = Regex("[^aeiou]*[aeiou]*")
+        val matchedResults = regex.findAll(word)
+        val result = StringBuilder()
+        for (matchedText in matchedResults) {
+            result.append("" + matchedText.value + " ")
+        }
+
+        println(result)
+    }
 }
