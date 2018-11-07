@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import ca.havensoft.tamilrhymingdictionary.R
 import ca.havensoft.tamilrhymingdictionary.databinding.WordListFragmentBinding
 import ca.havensoft.tamilrhymingdictionary.ui.adapter.WordListAdapter
+import ca.havensoft.tamilrhymingdictionary.util.convertToLatinScript
 import ca.havensoft.tamilrhymingdictionary.viewmodels.WordListViewModel
 
 import kotlinx.android.synthetic.main.word_list_fragment.*
@@ -49,7 +50,7 @@ class WordListFragment : Fragment() {
     }
 
     fun searchButtonClicked() {
-        viewModel.init(rhyme_word_input.text.toString())
+        viewModel.init(convertToLatinScript(rhyme_word_input.text.toString()))
 
         viewModel.wordList.observe(viewLifecycleOwner, Observer { wordList ->
             wordList?.let {
