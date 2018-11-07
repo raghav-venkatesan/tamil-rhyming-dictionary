@@ -1,35 +1,32 @@
 package ca.havensoft.tamilrhymingdictionary.ui.adapter
 
+import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ca.havensoft.tamilrhymingdictionary.R
+import ca.havensoft.tamilrhymingdictionary.databinding.WordDescLayoutBinding
 import ca.havensoft.tamilrhymingdictionary.model.Word
+import ca.havensoft.tamilrhymingdictionary.ui.WordListFragment
 import kotlinx.android.synthetic.main.word_desc_layout.view.*
 
-class WordListAdapter(private val wordsList: List<Word>) : RecyclerView.Adapter<WordListAdapter.WordDescHolder>() {
+class WordListAdapter(private val wordList: List<Word>) : RecyclerView.Adapter<WordListAdapter.MyViewHolder>() {
+    private lateinit var layoutInflater: LayoutInflater
 
-    override fun getItemCount() = wordsList.size
+    inner class MyViewHolder(val binding: WordDescLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onBindViewHolder(holder: WordListAdapter.WordDescHolder, position: Int) {
-        val wordItem = wordsList[position]
-        holder.bindWord(wordItem)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        layoutInflater = LayoutInflater.from(parent.context)
+        val binding = DataBindingUtil.inflate<WordDescLayoutBinding>(layoutInflater, R.layout.word_desc_layout, parent, false)
+        return MyViewHolder(binding)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordListAdapter.WordDescHolder {
-
-        val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.word_desc_layout, parent, false)
-        return WordDescHolder(inflatedView)
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        holder.binding.word = wordList[position]
     }
 
-    class WordDescHolder(wordView: View) : RecyclerView.ViewHolder(wordView) {
-        private var view = wordView
-        private var word: Word? = null
-
-        fun bindWord(word: Word) {
-            this.word = word
-            view.textViewWordDesc.text = word.tamilScript
-        }
+    override fun getItemCount(): Int {
+        return wordList.size
     }
 }

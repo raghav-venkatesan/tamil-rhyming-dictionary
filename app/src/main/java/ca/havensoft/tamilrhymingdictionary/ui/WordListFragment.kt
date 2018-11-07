@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -20,10 +21,6 @@ import kotlinx.android.synthetic.main.word_list_fragment.*
 
 class WordListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = WordListFragment()
-    }
-
     private lateinit var viewModel: WordListViewModel
 
     override fun onCreateView(
@@ -36,6 +33,7 @@ class WordListFragment : Fragment() {
         val binding = DataBindingUtil.inflate<WordListFragmentBinding>(
                 inflater, R.layout.word_list_fragment, container, false).apply {
             wordListViewModel = viewModel
+            wordListFragment = this@WordListFragment
             setLifecycleOwner(this@WordListFragment)
         }
 
@@ -45,21 +43,20 @@ class WordListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        word_list_view.layoutManager = LinearLayoutManager(context)
+        word_list_view.layoutManager = GridLayoutManager(context, 3)
+    }
 
-        searchButton.setOnClickListener {
-            viewModel.init(rhymeWordInput.text.toString())
+    fun searchButtonClicked() {
+        viewModel.init(rhymeWordInput.text.toString())
 
-            viewModel.getWordList().observe(viewLifecycleOwner, Observer { wordList ->
-                wordList?.let {
-                    Handler().postDelayed({
-                        val wordListAdapter = WordListAdapter(it)
-                        wordListAdapter.setHasStableIds(true)
-                        word_list_view.adapter = wordListAdapter
-                    }, 500)
-                }
-            })
-        }
+        viewModel.wordList.observe(viewLifecycleOwner, Observer { wordList ->
+            wordList?.let {
+                Handler().postDelayed({
+                    val wordListAdapter = WordListAdapter(it)
+                    word_list_view.adapter = wordListAdapter
+                }, 500)
+            }
+        })
     }
 
 }

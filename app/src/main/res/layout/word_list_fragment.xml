@@ -5,7 +5,11 @@
     <data>
         <variable
             name="wordListViewModel"
-            type="ca.havensoft.tamilrhymingdictionary.viewmodels.WordListViewModel" />
+            type="ca.havensoft.tamilrhymingdictionary.viewmodels.WordListViewModel"/>
+
+        <variable
+            name="wordListFragment"
+            type="ca.havensoft.tamilrhymingdictionary.ui.WordListFragment"/>
     </data>
 
     <LinearLayout
@@ -47,7 +51,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/search"
                 android:textAllCaps="true"
-                android:layout_marginStart="15dp"/>
+                android:layout_marginStart="15dp"
+                android:onClick="@{() -> wordListFragment.searchButtonClicked()}"/>
 
         </LinearLayout>
 

@@ -12,7 +12,7 @@ class WordListViewModel : ViewModel() {
     @Inject
     lateinit var wordRepo: WordRepository
 
-    private val wordList = MutableLiveData<List<Word>>()
+    val wordList = MutableLiveData<List<Word>>()
 
     fun init(wordToBeMatched: String) {
         injectWordRepo(this)
@@ -21,6 +21,4 @@ class WordListViewModel : ViewModel() {
             wordList.postValue(it)
         }
     }
-
-    fun getWordList() = wordList
 }
