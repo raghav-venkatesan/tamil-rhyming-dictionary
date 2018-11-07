@@ -49,7 +49,7 @@ class WordListFragment : Fragment() {
     }
 
     fun searchButtonClicked() {
-        viewModel.init(rhymeWordInput.text.toString())
+        viewModel.init(rhyme_word_input.text.toString())
 
         viewModel.wordList.observe(viewLifecycleOwner, Observer { wordList ->
             wordList?.let {
