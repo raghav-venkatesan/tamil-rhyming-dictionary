@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +21,11 @@ import kotlinx.android.synthetic.main.word_list_fragment.*
 class WordListFragment : Fragment() {
 
     private lateinit var viewModel: WordListViewModel
+
+    companion object {
+        private const val COLUMNS = 3
+        private const val DELAY: Long = 500
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +47,7 @@ class WordListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        word_list_view.layoutManager = GridLayoutManager(context, 3)
+        word_list_view.layoutManager = GridLayoutManager(context, COLUMNS)
     }
 
     fun searchButtonClicked() {
@@ -54,7 +58,7 @@ class WordListFragment : Fragment() {
                 Handler().postDelayed({
                     val wordListAdapter = WordListAdapter(it)
                     word_list_view.adapter = wordListAdapter
-                }, 500)
+                }, DELAY)
             }
         })
     }
