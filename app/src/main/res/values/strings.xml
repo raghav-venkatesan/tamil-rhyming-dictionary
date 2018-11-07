@@ -2,9 +2,6 @@
     <string name="app_name">Tamil Rhyming Dictionary</string>
     <string name="enter_a_word_to_search">தேட வேண்டிய வார்த்தை</string>
     <string name="search">தேடு</string>
-    <string name="edhugai">எதுகை</string>
-    <string name="monai">மோனை</string>
-    <string name="iyaibu">இயைபு</string>
     <string name="thodakkam">தொடக்கம்</string>
     <string name="mudivu">முடிவு</string>
 </resources>
