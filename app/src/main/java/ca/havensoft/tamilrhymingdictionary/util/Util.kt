@@ -474,7 +474,7 @@ fun convertToLatinScript(tamilScript: String): String {
         .replace("ன்றி", "ndRi")
         .replace("ன்றீ", "ndRee")
         .replace("ன்று", "ndRu")
-        .replace("ன்றூ", "ndRoo")git st
+        .replace("ன்றூ", "ndRoo")
         .replace("ன்றெ", "ndRe")
         .replace("ன்றொள", "ndRow")
         .replace("ன்றோ", "ndRoa")
