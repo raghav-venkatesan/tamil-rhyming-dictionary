@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/word_list_view"
-            android:layoutAnimation="@anim/layout_animation_slide_up"/>
+            android:layoutAnimation="@anim/grid_layout_animation_from_bottom"/>
 
     </LinearLayout>
 </layout>
