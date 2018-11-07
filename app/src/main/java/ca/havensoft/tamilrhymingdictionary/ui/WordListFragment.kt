@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
@@ -24,7 +23,6 @@ class WordListFragment : Fragment() {
 
     companion object {
         private const val COLUMNS = 3
-        private const val DELAY: Long = 500
     }
 
     override fun onCreateView(
@@ -55,10 +53,8 @@ class WordListFragment : Fragment() {
 
         viewModel.wordList.observe(viewLifecycleOwner, Observer { wordList ->
             wordList?.let {
-                Handler().postDelayed({
-                    val wordListAdapter = WordListAdapter(it)
-                    word_list_view.adapter = wordListAdapter
-                }, DELAY)
+                val wordListAdapter = WordListAdapter(it)
+                word_list_view.adapter = wordListAdapter
             }
         })
     }
