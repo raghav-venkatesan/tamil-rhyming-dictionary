@@ -14,10 +14,10 @@ class WordListViewModel : ViewModel() {
 
     val wordList = MutableLiveData<List<Word>>()
 
-    fun updateWordList(wordToBeMatched: String, matchCriteria: Int) {
+    fun updateWordList(wordToBeMatched: String, matchCriteria: Int, syllables: Int) {
         injectWordRepo(this)
 
-        wordRepo.matchingWordList(wordToBeMatched, matchCriteria) {
+        wordRepo.matchingWordList(wordToBeMatched, matchCriteria, syllables) {
             wordList.postValue(it)
         }
     }

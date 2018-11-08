@@ -8,8 +8,8 @@ typealias WordsReceived = (List<Word>) -> Unit
 @Singleton
 data class WordRepository(private val service: WordListService) {
 
-    fun matchingWordList(wordToBeMatched: String, matchCriteria: Int, wordsReceived: WordsReceived) {
-        wordsReceived.invoke(service.matchingWordList(wordToBeMatched, matchCriteria))
+    fun matchingWordList(wordToBeMatched: String, matchCriteria: Int, syllables: Int, wordsReceived: WordsReceived) {
+        wordsReceived.invoke(service.matchingWordList(wordToBeMatched, matchCriteria, syllables))
     }
 
 }

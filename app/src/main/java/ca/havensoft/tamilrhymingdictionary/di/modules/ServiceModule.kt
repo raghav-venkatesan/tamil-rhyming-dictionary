@@ -15,7 +15,7 @@ class ServiceModule {
     @Singleton
     fun provideService(context: Context): WordListService {
 
-        val inputStream  = context.resources.openRawResource(R.raw.tamil_dictionary)
+        val inputStream  = context.resources.openRawResource(R.raw.tamil_word_list)
         return WordListService(CSVFile(inputStream).read()!!)
     }
 

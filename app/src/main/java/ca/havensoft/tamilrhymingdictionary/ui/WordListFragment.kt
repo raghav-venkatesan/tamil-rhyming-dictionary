@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.word_list_fragment.*
 class WordListFragment : Fragment() {
 
     private lateinit var viewModel: WordListViewModel
+    private var syllables = 0
 
     companion object {
         private const val COLUMNS = 3
@@ -49,11 +50,12 @@ class WordListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         word_list_view.layoutManager = GridLayoutManager(context, COLUMNS)
+        updateSyllablesTextView()
     }
 
     fun fetchMatchingWords() {
         val matchCriteria = if (radio_group_search_type.checkedRadioButtonId == R.id.radio_button_end) MATCH_END else MATCH_BEGINNING
-        viewModel.updateWordList(convertToLatinScript(rhyme_word_input.text.toString()), matchCriteria)
+        viewModel.updateWordList(convertToLatinScript(rhyme_word_input.text.toString()), matchCriteria, syllables)
 
         viewModel.wordList.observe(viewLifecycleOwner, Observer { wordList ->
             wordList?.let {
@@ -61,6 +63,16 @@ class WordListFragment : Fragment() {
                 word_list_view.adapter = wordListAdapter
             }
         })
+    }
+
+    fun updateSyllablesTextView() {
+        val syllablesString = if (syllables == 0) resources.getString(R.string.syllables) + " All" else resources.getString(R.string.syllables) + " " + syllables
+        syllables_text_view.text = syllablesString
+    }
+
+    fun trackProgress(progressValue: Int) {
+        syllables = progressValue
+        updateSyllablesTextView()
     }
 
 }
