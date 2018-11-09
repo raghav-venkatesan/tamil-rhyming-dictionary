@@ -6,14 +6,17 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 
 import ca.havensoft.tamilrhymingdictionary.R
 import ca.havensoft.tamilrhymingdictionary.application.MATCH_BEGINNING
 import ca.havensoft.tamilrhymingdictionary.application.MATCH_END
 import ca.havensoft.tamilrhymingdictionary.databinding.WordListFragmentBinding
+import ca.havensoft.tamilrhymingdictionary.ui.customviews.ItemOffsetDecoration
 import ca.havensoft.tamilrhymingdictionary.ui.adapter.WordListAdapter
 import ca.havensoft.tamilrhymingdictionary.util.convertToLatinScript
 import ca.havensoft.tamilrhymingdictionary.viewmodels.WordListViewModel
@@ -50,6 +53,11 @@ class WordListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         word_list_view.layoutManager = GridLayoutManager(context, COLUMNS)
+        word_list_view.addItemDecoration(
+            ItemOffsetDecoration(
+                resources.getDimensionPixelOffset(R.dimen.default_spacing_small)
+            )
+        )
         updateSyllablesTextView()
     }
 
@@ -61,11 +69,12 @@ class WordListFragment : Fragment() {
             wordList?.let {
                 val wordListAdapter = WordListAdapter(it)
                 word_list_view.adapter = wordListAdapter
+                runLayoutAnimation(word_list_view)
             }
         })
     }
 
-    fun updateSyllablesTextView() {
+    private fun updateSyllablesTextView() {
         val syllablesString = if (syllables == 0) resources.getString(R.string.syllables) + " All" else resources.getString(R.string.syllables) + " " + syllables
         syllables_text_view.text = syllablesString
     }
@@ -73,6 +82,25 @@ class WordListFragment : Fragment() {
     fun trackProgress(progressValue: Int) {
         syllables = progressValue
         updateSyllablesTextView()
+    }
+
+    private fun runLayoutAnimation(recyclerView: RecyclerView) {
+        val context = recyclerView.context
+
+        val controller = AnimationUtils.loadLayoutAnimation(context, pickAnAnimation())
+
+        recyclerView.layoutAnimation = controller
+        recyclerView.adapter!!.notifyDataSetChanged()
+        recyclerView.scheduleLayoutAnimation()
+    }
+
+    private fun pickAnAnimation(): Int {
+        val randomInteger = (1..3).shuffled().first()
+        return when (randomInteger) {
+            1 -> R.anim.grid_layout_animation_scale_random
+            2 -> R.anim.grid_layout_animation_scale
+            else -> R.anim.grid_layout_animation_from_bottom
+        }
     }
 
 }

@@ -3,13 +3,10 @@ package ca.havensoft.tamilrhymingdictionary.ui.adapter
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import ca.havensoft.tamilrhymingdictionary.R
 import ca.havensoft.tamilrhymingdictionary.databinding.WordDescLayoutBinding
 import ca.havensoft.tamilrhymingdictionary.model.Word
-import ca.havensoft.tamilrhymingdictionary.ui.WordListFragment
-import kotlinx.android.synthetic.main.word_desc_layout.view.*
 
 class WordListAdapter(private val wordList: List<Word>) : RecyclerView.Adapter<WordListAdapter.MyViewHolder>() {
     private lateinit var layoutInflater: LayoutInflater

@@ -1,7 +1,6 @@
 package ca.havensoft.tamilrhymingdictionary.di.modules
 
 import android.content.Context
-import ca.havensoft.tamilrhymingdictionary.application.appContext
 import ca.havensoft.tamilrhymingdictionary.repository.WordListService
 import ca.havensoft.tamilrhymingdictionary.R
 import ca.havensoft.tamilrhymingdictionary.util.CSVFile
